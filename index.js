@@ -3,31 +3,24 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var url = require('url');
 var Client = require('node-rest-client').Client;
+var apiURL = "https://api.flickr.com/services/rest/?method=";
+var Handlebars = require('handlebars/runtime');
+
 var app = new express();
 var client = new Client();
-var apiURL = "https://api.flickr.com/services/rest/?method=flickr.photos.search";
 
 app.use(express.static('public') );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-//index or home
-app.get('/',function(req,res){
-	res.status(200).end('home');
-});
-
-//path to readme/documentation page
-app.get('/docs',function(req,res){
-	res.status(200).end('docs');
-});
 
 //path to search for images
 app.all(/(\/search)|(\/search\/:terms)/,function(req,res){
 	var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
 	//parse request terms
-	client.get(apiURL+'&api_key=' +process.env.API_KEY+ '&media=photos&per_page=10&tags='+ query.terms, function(data,resp){
+	client.get(apiURL+'flickr.photos.search&api_key=' +process.env.API_KEY+ '&media=photos&per_page=10&tags='+ query.terms, function(data,resp){
 		//need to format resp as pic {url,title,thumb,pageURL}
 		//send stuff back to client
 		res.status(200).json(data);
@@ -35,8 +28,18 @@ app.all(/(\/search)|(\/search\/:terms)/,function(req,res){
 });
 
 //path to browse latest images
-app.get('/latest/:page',function(req,res){
-	//do stuff
+app.get('/latest/:page', function(req,res){
+	client.get(apiURL+'flickr.photos.getRecent&api_key=' +process.env.API_KEY+ '&format=json&per_page=10&extras=date_upload,owner_name,url_sq,views,tags', {headers: { "Content-Type": "application/json" }}, function(data,resp){
+		//send stuff back to client
+		var jsonFlickrApi = function(data){
+			res.status(200).json(data.photos.photo );
+		};
+		eval(data.toString());
+	});
+});
+
+app.get('/latest',function(res,res){
+	res.redirect('/latest/1');
 });
 
 app.get('/*',function(req,res){

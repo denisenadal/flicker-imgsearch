@@ -8,5 +8,33 @@
 </head>
 <body>
 <!-- put app fronend here -->
+<header>
+	<h1>flicker feed</h1>
+	<nav><a href="docs.html">docs</a><input type="text" id="search"><input type="submit" id="doSearch"></nav>
+</header>
+<main>
+
+</main>
+<aside class="photo-results">
+
+</aside>
+<footer>
+	<small>copyright stuff</small>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+	<script id="photo-template" type="text/x-handlebars-template">
+		{{#photos}}
+		<article class="imageItem">
+			<a href="https://www.flickr.com/photos/{{owner}}/{{id}}"><img src="{{url_sq}}" alt="title" height="{{height_sq}}" width="{{width_sq}}"></a>
+			<div class="details">
+				<h1 class="headline">{{title}}</h1>
+				<p class="byline">posted on {{dateupload}} by <a href="https://www.flickr.com/people/{{owner}}/">{{ownername}}</a></p>
+			</div>
+		</article>
+		{{/photos}}
+	</script>
+	<script src="js/client.js"></script>
+
+</footer>
 </body>
 </html>
