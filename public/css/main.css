@@ -20,6 +20,7 @@ header .container {
     justify-content: space-between;
     align-content: flex-end;
     align-items: flex-end;
+	flex-direction: column;
 	padding: 1em 0 0;
 	border-bottom: deeppink solid 8px;
 }
@@ -31,7 +32,7 @@ header h1{
 	letter-spacing: .02em;
 }
 nav a, nav input[type="button"], label, button {
-    display: inline-block;
+    display: block;
     padding: .5em 1em;
     background: none;
     border: none;
@@ -100,6 +101,7 @@ div.content-wrap {
 	margin-top: 1em;
 	background:#fff;
 	display: flex;
+	flex-flow: column;
 	border-left: 0.45em solid yellow;
 	border-right: .45em solid yellow;
 }
@@ -110,6 +112,11 @@ div.content-wrap {
 .byline .date{display: none;}
 @media screen and (min-width:769px){
 	.container{width: 660px;}
+	header .container,
+	div.content-wrap  {
+		flex-direction: row;
+	}
+	nav a, nav input[type="button"], label, button{display: inline-block;}
 }
 @media screen and (min-width:1025px){
 	.container{width:800px}
