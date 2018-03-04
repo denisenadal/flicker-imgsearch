@@ -11,18 +11,34 @@
 <header>
 	<div class="container">
 		<h1>flicker feed demo</h1>
-		<nav><a href="/latest/1">Latest Photos JSON</a><input type="text" id="search" placeholder="what images do you want to see?"><input type="submit" value="Search" id="doSearch"><input type="submit" value="get JSON" id="doSearchJSON"></nav>
+		<nav>
+			<a href="#">Latest Photos</a>
+			<a href="/latest/1">Latest JSON</a>
+			<input type="text" id="search" placeholder="what images do you want to see?">
+			<fieldset id="searchType">
+				<input type="radio" name="searchType" id="viewResults" value="html" checked><label for="viewResults"> view results</label>
+				<input type="radio" name="searchType" id="getJSON" value="json"><label for="viewResults" > get JSON</label>
+			</fieldset>
+		<input type="button" value="Go!" id="doSearch">
+	</nav>
 	</div>
 </header>
 <div class="container content-wrap">
-	<main class="content"></main>
+	<main class="content">
+		documentation goes here
+	</main>
 	<aside class="sidebar" >
+		<h2 id="photosLabel" data-results="latest">Latest Photos</h2>
 	<div id="photo-results" data-page="1"></div>
-	<button id="previous" style="display:none;">Previous</button><button id="next">Next </button>
+	<nav class="resultNav">
+		<button id="previous" style="display:none;"> Previous</button><p id="currentPage">Page 1</p><button id="next">Next </button>
+	</nav>
 	</aside>
 </div>
 <footer>
-	<small class="container">copyright stuff</small>
+	<div class="container">
+		<small class="container">copyright stuff</small>
+</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
 	<script id="photo-template" type="text/x-handlebars-template">
@@ -30,8 +46,8 @@
 		<article class="imageItem">
 			<a href="https://www.flickr.com/photos/{{owner}}/{{id}}"><img src="{{url_sq}}" alt="title" height="{{height_sq}}" width="{{width_sq}}"></a>
 			<div class="details">
-				<h1 class="headline">{{title}}</h1>
-				<p class="byline">posted on {{formatDate dateupload}} by <a href="https://www.flickr.com/people/{{owner}}/">{{ownername}}</a></p>
+				<a class="headline" href="https://www.flickr.com/photos/{{owner}}/{{id}}"><h1>{{title}}</h1></a>
+				<p class="byline">posted on {{formatDate dateupload}} by<br> <a href="https://www.flickr.com/people/{{owner}}/">{{ownername}}</a></p>
 			</div>
 		</article>
 		{{/photos}}

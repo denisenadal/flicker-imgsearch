@@ -3,26 +3,97 @@
 	padding: 0;
 	position: relative;
 	box-sizing: border-box;
+	letter-spacing: .005em;
+	line-height: 125%;
 }
 body,html{
 	background:#e1e1e1;
 }
 header{
-	border-bottom: 1em solid deeppink;
-	background: #a5a3b6;
+	background: #fff;
 }
 header .container {
     display: flex;
     justify-content: space-between;
     align-content: flex-end;
     align-items: flex-end;
-    padding: 3em 0 1.5em;
+	padding: 1em 0 0;
+	border-bottom: deeppink solid 8px;
 }
 header h1{
-	color:#332095;
+	color: yellow;
+	background: #000;
+	padding: .25em 4em .25em 2em;
+	left: -3rem;
+	letter-spacing: .02em;
+}
+nav a, nav input[type="button"], label, button {
+    display: inline-block;
+    padding: .5em 1em;
+    background: none;
+    border: none;
+	border-top: 5px solid transparent;
+    font-size: 1em;
+    text-decoration: none;
+    font-weight: bold;
+    color: #1b47f4;
+}
+nav a:hover, nav input[type="button"]:hover, button:hover {
+    border-top: 5px dotted #1b47f4;
+    background: yellow;
+}
+input[type="text"] {
+    padding: .5em .75em;
+    background: #f1f1f1;
+    border: none;
+    width: 220px;
+    top: -.5em;
+}
+input[type="text"]:focus {
+    background: #000;
+    color: yellow;
+}
+#searchType {
+    display: inline-block;
+    border: none;
+	left: .5em;
+}
+#searchType label {
+    display: block;
+    font-size: .75em;
+    color: deepskyblue;
+    font-weight: bold;
+	padding: .2em 1em;
+	margin-top: -.5em;
+}
+label::before {
+    background: #f1f1f1;
+    width: 8px;
+    height: 8px;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 7px;
+    border-radius: 50%;
+    left: -2px;
+    border: 1px solid rgba(0,0,0,.05);
+}
+[type="radio"]:checked + label::before {
+    background: yellow;
+    content: '✓';
+    color: deeppink;
+    line-height: 60%;
+}
+input[type="radio"] {
+	opacity: 0;
+    display: inline-block;
+    position: absolute;
+    left: -3px;
+    margin-top: 5px;
+    z-index: 3;
 }
 div.content-wrap {
-	margin-top: 3em;
+	margin-top: 1em;
 	background:#fff;
 	display: flex;
 	border-left: 0.45em solid yellow;
@@ -50,39 +121,104 @@ div.content-wrap {
 .sidebar {
   width: 33.3%;
 }
-.content-wrap a {
+.content-wrap a,
+.byline a {
     color: tomato;
 }
 .imageItem {
     border-top: .32em solid deepskyblue;
     padding: 1em 0 0;
 }
-.imgItem>a {
-  float: left;
-  display: block;
+.imageItem:last-of-type{
+	border-bottom: .32em solid deepskyblue;
 }
 .imageItem > a {
   display: block;
   float: left;
-  margin: .25em 1em 1em 0;
+  margin: .25em 1.33em 1em 0;
+  z-index: 1;
 }
-p.byline, .headline {
-  margin: 0 0 .25em;
-  padding: 0;
-  /*! margin-block-end: 0; */
-  /*! margin-block-start: 0; */
+.imageItem > a::before {
+    content: '';
+    background: #000;
+    color: #fff;
+    display: block;
+    padding: .2em .3em;
+    position: absolute;
+    z-index: -1;
+    top: -.3em;
+    left: -.3em;
+    width: 100%;
+    height: 100%;
+    bottom: -.3em;
+    right: -.3em;
+}
+.imageItem >a::after {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,1) 4px, rgba(0,0,0,1) 6px);
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    padding: .3em .4em;
+}
+.imageItem > a:hover::before {
+    background: deeppink;
+    color: #fff;
+}
+.imageItem >a:hover::after {
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, deeppink 4px, tomato 6px);
+}
+.details {
+  float: left;
   word-wrap: break-word;
+  max-width: calc( 100% - 75px - 1.33em);
+}
+.details a:hover{
+	color: #fff;
+	z-index: 1;
+	display: inline-block;
+}
+a.headline {
+	display: inline-block;
+	max-height: 48px;
+	overflow: hidden;
+	color:#000;
+}
+.headline h1 {
+    display: block;
+    max-width: 100%;
+    word-break: break-all;
+}
+.headline:hover {
+	background: #000;
+    outline: 3px solid #000;
+    box-shadow: 40px 0 0 3px #000, -7px 0 0 3px #000;
+}
+.byline a{color:tomato;}
+.byline a:hover::before{
+	content: '';
+	width: 100%;
+	height: 100%;
+	background: #000;
+	padding: .25em 1.4em;
+	position: absolute;
+	top: -.15em;
+	left: -.6em;
+	z-index: -1;
 }
 .imageItem::after {
   content: '';
   display: table;
   clear: both;
 }
-.details {
-  float: left;
-  /*! clear: none; */
-  max-width: calc( 100% - 75px - 1em);
-}
-.headline {
-  /*! max-width: 10ch; */
+.resultNav {
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
 }
