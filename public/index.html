@@ -25,7 +25,36 @@
 </header>
 <div class="container content-wrap">
 	<main class="content">
-		documentation goes here
+		<h1><a id="flickerimgsearch_demo_0"></a>flicker-imgsearch demo</h1>
+
+		<h2><a id="description_2"></a>description</h2>
+		<p>Allows users to search through flickr’s database of images. Users can search for images by topic, or browse latest images. The results for either can be view in the app, or viewed as raw JSON. It’s loosely based on the project found here: <a href="https://www.freecodecamp.org/challenges/image-search-abstraction-layer">https://www.freecodecamp.org/challenges/image-search-abstraction-layer</a></p>
+
+		<h2><a id="Viewing_results_for_latestsearch_results_5"></a>Viewing results for latest/search results</h2>
+		<p>If you want to view the results, simply use the search bar and navigation buttons to select what you would like to view. The results are loaded into the sidebar.</p>
+
+		<h2><a id="API_endpoints_for_JSON_requests_8"></a>API endpoints for JSON requests</h2>
+		<h3><a id="search_10"></a>/search</h3>
+		<p>/search is the end point for searching for images by topic. It expects a “terms” parameter, as a comma separated string of topics to search for. It can also recieve a “offset” parameter to to determine which page of the results to return. For instance:</p>
+		<pre>
+			<code>/search/?terms=cats
+				returns the 1st page of cat pictures
+			</code>
+		</pre>
+		<pre>
+			<code>/search/?terms=cats,dogs,ponies?offset=2
+			returns the 2nd page of results of dog, cat or pony pictures
+			</code>
+		</pre>
+		<h3><a id="latestpage_26"></a>/latest/:page</h3>
+		<p>/latest/ is the endpoint for a feed of the most recently uploaded images. Requests to /latest/ are rerouted to /latest/1, which returns the 1st page of results. To return other pages, add the page number to the url:</p>
+		<pre>
+			<code>/latest/3
+			returns the 3rd page of recent images
+			</code>
+		</pre>
+		<h2><a id="dependencies_36"></a>dependencies</h2>
+		<p>are listed in package.json. They are dotenv, for storing api keys, express, body parser and the url package to handle requests, the node-rest-client to make the api requests to flickr, and the handlebars runtime package to build the front-end templates.</p>
 	</main>
 	<aside class="sidebar" >
 		<h2 id="photosLabel" data-results="latest">Latest Photos</h2>
@@ -44,10 +73,10 @@
 	<script id="photo-template" type="text/x-handlebars-template">
 		{{#photos}}
 		<article class="imageItem">
-			<a href="https://www.flickr.com/photos/{{owner}}/{{id}}"><img src="{{url_sq}}" alt="title" height="{{height_sq}}" width="{{width_sq}}"></a>
+			<a href="https://www.flickr.com/photos/{{owner}}/{{id}}"><img src="{{url_q}}" alt="title" height="{{height_q}}" width="{{width_q}}"></a>
 			<div class="details">
 				<a class="headline" href="https://www.flickr.com/photos/{{owner}}/{{id}}"><h1>{{title}}</h1></a>
-				<p class="byline">posted on {{formatDate dateupload}} by<br> <a href="https://www.flickr.com/people/{{owner}}/">{{ownername}}</a></p>
+				<p class="byline"><span class="date">posted on {{formatDate dateupload}}</span> by<br class="date"> <a href="https://www.flickr.com/people/{{owner}}/">{{ownername}}</a></p>
 			</div>
 		</article>
 		{{/photos}}

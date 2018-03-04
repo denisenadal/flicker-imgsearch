@@ -21,7 +21,7 @@ app.get('/search',function(req,res){
 	var page = typeof url_parts.query.offset !== 'undefined' ? url_parts.query.offset : 1;
 	//parse request terms
 	console.log('getting search results for '+url_parts.query.terms);
-	var getAPI = client.get(apiURL+'flickr.photos.search&api_key=' +process.env.API_KEY+ '&format=json&media=photos&extras=date_upload,owner_name,url_sq,views,tags,url_o&per_page=10&page='+page+'&tags='+ url_parts.query.terms, {headers: { "Content-Type": "application/json" }}, function(data,resp){
+	var getAPI = client.get(apiURL+'flickr.photos.search&api_key=' +process.env.API_KEY+ '&format=json&media=photos&extras=date_upload,owner_name,url_q,views,tags,url_o&per_page=10&page='+page+'&tags='+ url_parts.query.terms, {headers: { "Content-Type": "application/json" }}, function(data,resp){
 		//send stuff back to client
 		var jsonFlickrApi = function(data){
 			res.status(200).json(data );
@@ -39,7 +39,7 @@ app.get('/latest/:page', function(req,res){
 	var url_parts = url.parse(req.url, true);
 	var page = typeof req.params.page !== 'undefined' ? req.params.page : 1;
 	console.log('getting latest results');
-	var getAPI = client.get(apiURL+'flickr.photos.getRecent&api_key=' +process.env.API_KEY+ '&format=json&per_page=10&page='+page+'&extras=date_upload,owner_name,url_sq,views,tags,url_o', {headers: { "Content-Type": "application/json" }}, function(data,resp){
+	var getAPI = client.get(apiURL+'flickr.photos.getRecent&api_key=' +process.env.API_KEY+ '&format=json&per_page=10&page='+page+'&extras=date_upload,owner_name,url_q,views,tags,url_o', {headers: { "Content-Type": "application/json" }}, function(data,resp){
 		//send stuff back to client
 		var jsonFlickrApi = function(data){
 			res.status(200).json(data.photos );

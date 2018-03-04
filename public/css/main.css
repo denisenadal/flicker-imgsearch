@@ -1,3 +1,5 @@
+ @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
+
 *{
 	margin: 0;
 	padding: 0;
@@ -8,6 +10,7 @@
 }
 body,html{
 	background:#e1e1e1;
+	font-family: 'Roboto', sans-serif;
 }
 header{
 	background: #fff;
@@ -45,6 +48,7 @@ nav a:hover, nav input[type="button"]:hover, button:hover {
 input[type="text"] {
     padding: .5em .75em;
     background: #f1f1f1;
+	color: #1b47f4;
     border: none;
     width: 220px;
     top: -.5em;
@@ -103,11 +107,13 @@ div.content-wrap {
 	padding:2em;
 	margin:0 auto;
 }
+.byline .date{display: none;}
 @media screen and (min-width:769px){
 	.container{width: 660px;}
 }
 @media screen and (min-width:1025px){
 	.container{width:800px}
+	.byline .date{display: inline-block;}
 }
 @media screen and (min-width:1201px){
 	.container{width:1000px}
@@ -117,6 +123,30 @@ div.content-wrap {
 }
 .content {
   width: 66.6%;
+  padding-right: 2em;
+}
+.content h2, .content h3, .content h4 {
+    margin-top: 2em;
+    margin-bottom: .25em;
+}
+h1 + h2, h2 + h3, h3 + h4 {
+    margin-top: 0 !important;
+}
+.content p {
+    line-height: 133%;
+    letter-spacing: .01em;
+    margin: 0 0 1em 0;
+    hyphens: none;
+}
+.content a:hover {
+    background: #000;
+    color: yellow;
+}
+pre {
+    white-space: pre-line;
+    padding: 1.5em;
+    background: #f1f1f1;
+    margin: 1.5em 3em;
 }
 .sidebar {
   width: 33.3%;
@@ -124,6 +154,7 @@ div.content-wrap {
 .content-wrap a,
 .byline a {
     color: tomato;
+	transition: .25s ease-in;
 }
 .imageItem {
     border-top: .32em solid deepskyblue;
@@ -135,25 +166,17 @@ div.content-wrap {
 .imageItem > a {
   display: block;
   float: left;
-  margin: .25em 1.33em 1em 0;
+  margin:0.2em 1em 1em 0;
+  max-width: 27%;
   z-index: 1;
 }
-.imageItem > a::before {
-    content: '';
-    background: #000;
-    color: #fff;
-    display: block;
-    padding: .2em .3em;
-    position: absolute;
-    z-index: -1;
-    top: -.3em;
-    left: -.3em;
-    width: 100%;
-    height: 100%;
-    bottom: -.3em;
-    right: -.3em;
+.imageItem img {
+    border: 5px solid #000;
+	background: #000;
+	max-width: 100%;
+	height: auto;
 }
-.imageItem >a::after {
+.imageItem > a::after {
     background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,1) 4px, rgba(0,0,0,1) 6px);
     content: '';
     width: 100%;
@@ -163,19 +186,26 @@ div.content-wrap {
     left: 0;
     top: 0;
     z-index: -1;
-    padding: .3em .4em;
+    padding: .1em .25em;
 }
 .imageItem > a:hover::before {
+    content: '';
     background: deeppink;
-    color: #fff;
-}
-.imageItem >a:hover::after {
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, deeppink 4px, tomato 6px);
+	display: block;
+	padding: .2em .3em;
+	position: absolute;
+	z-index: -1;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	bottom: -.3em;
+	right: -.3em;
 }
 .details {
   float: left;
   word-wrap: break-word;
-  max-width: calc( 100% - 75px - 1.33em);
+  max-width: calc( 66.6% - 1em);
 }
 .details a:hover{
 	color: #fff;
@@ -184,21 +214,33 @@ div.content-wrap {
 }
 a.headline {
 	display: inline-block;
-	max-height: 48px;
+	max-height: 44px;
 	overflow: hidden;
 	color:#000;
+	transition: none;
 }
 .headline h1 {
     display: block;
     max-width: 100%;
     word-break: break-all;
+	line-height: 110%;
 }
 .headline:hover {
 	background: #000;
     outline: 3px solid #000;
     box-shadow: 40px 0 0 3px #000, -7px 0 0 3px #000;
 }
-.byline a{color:tomato;}
+.byline {
+    font-size: .8em;
+    font-style: italic;
+    color: #aeaeae;
+    font-weight: bold;
+}
+.byline a{
+	color:tomato;
+	font-size: 1.2em;
+	font-style: normal;
+}
 .byline a:hover::before{
 	content: '';
 	width: 100%;
@@ -221,4 +263,16 @@ a.headline {
     justify-content: space-between;
     align-items: baseline;
     width: 100%;
+}
+#currentPage {
+    font-weight: bold;
+    color: #bfc9d0;
+    font-style: italic;
+}
+footer .container {
+    padding: .75em 0 .25em;
+    padding-bottom: 1em;
+    text-align: right;
+    font-style: italic;
+    color: #809190;
 }
